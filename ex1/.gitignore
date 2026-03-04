@@ -14,3 +14,5 @@ debug.log
 
 # VSCode
 .vscode/
+
+.gitignore
