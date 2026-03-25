@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 6px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* 課程名稱連結樣式 */
+        .course-link {
+            color: #0056b3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* --- 中央彈窗 (Modal) 樣式 --- */
+        #modal-overlay {
+            display: none;
+            /* 預設隱藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* 半透明黑背景 */
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+            /* 背景模糊感 */
+        }
+
+        #modal-container {
+            display: none;
+            /* 預設隱藏 */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* 絕對置中 */
+            width: 85%;
+            max-width: 1000px;
+            height: 80%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>資工選課表</h1>
+
+    <div id="modal-overlay" onclick="closeModal()"></div>
+    <div id="modal-container">
+        <div class="modal-header">
+            <span id="modal-title">課程詳細資料</span>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
+        <iframe id="course-frame" src=""></iframe>
+    </div>
+
+    <table id="csie">
+        <tr>
+            <th>開課單位</th>
+            <th>課程名稱</th>
+            <th>授課老師</th>
+        </tr>
+        <tr>
+            <td>資工系</td>
+            <td class="course-link" onclick="openModal('A2337', '物件導向軟體設計')">物件導向軟體設計</td>
+            <td>黃崇源</td>
+        </tr>
+        <tr>
+            <td>資工系</td>
+            <td class="course-link" onclick="openModal('61602', '計算機網路實驗')">計算機網路實驗</td>
+            <td>李春良</td>
+        </tr>
+        <tr>
+            <td>資工系</td>
+            <td class="course-link" onclick="openModal('A2338', '作業系統實務')">作業系統實務</td>
+            <td>張哲維</td>
+        </tr>
+        <tr>
+            <td>資工系</td>
+            <td class="course-link" onclick="openModal('71796', '生物統計')">生物統計</td>
+            <td>陳光武</td>
+        </tr>
+        <tr>
+            <td>資工系</td>
+            <td class="course-link" onclick="openModal('A2339', '通訊系統')">通訊系統</td>
+            <td>陳仁輝</td>
+        </tr>
+        <tr>
+            <td>資工系</td>
+            <td class="course-link" onclick="openModal('A2340', '軟硬體專題(2)')">軟硬體專題(2)</td>
+            <td>魏志達</td>
+        </tr>
+    </table>
+
+    <button onclick ="changeResult()">change</button>
+
+    <script>
+        const overlay = document.getElementById('modal-overlay');
+        const container = document.getElementById('modal-container');
+        const frame = document.getElementById('course-frame');
+        const title = document.getElementById('modal-title');
+
+        // 改為 openModal 並帶入課程名稱
+        function openModal(sectionId, courseName) {
+            const targetUrl = `https://catalog.cgu.edu.tw/coursedata?sectionid=${sectionId}`;
+
+            title.innerText = "課程詳細資料：" + courseName;
+            frame.src = targetUrl;
+
+            overlay.style.display = 'block';
+            container.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 禁止底層捲動
+        }
+
+        function closeModal() {
+            overlay.style.display = 'none';
+            container.style.display = 'none';
+            frame.src = ""; // 清空內容防止背景運作
+            document.body.style.overflow = ''; // 恢復捲動
+        }
+
+        function changeResult() {
+            var myTable = document.getElementById("csie");
+            myTable.rows[1].cells[2].innerHTML = "李春良";
+        }
+
+        // 按下 Esc 鍵關閉
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });  
+    </script>
+
+</body>
+
+</html>
