@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <button onclick ="tree(5)">Tree</button>
+
+    <script>
+        function tree(n) {
+            printTreeTop(n);
+            printTreeBottom(n);
+        }
+        function printTreeTop(n) {
+            let c = "";
+            let m = n;
+            for(let i = 1;i <= n;i++) {
+                
+                c += repeatchar(" ", m-1);
+                c += repeatchar("*", 2*i-1);
+                c += "\n";
+                m--;
+            }
+            console.log(c);
+        }
+        function printTreeBottom(n) {
+            let c = "";
+            let m = n;
+            for(let i = 0; i<n-1;i++) {
+                c += repeatchar(" ", m-1);
+                c += repeatchar("*", 1);
+                c += "\n";
+            }
+            console.log(c);
+        }
+        function repeatchar(char, n) {
+            let c ="";
+            for(let i=0; i<n;i++) {
+                c+=char;
+            }
+            return c;
+        }
+
+    </script>
+</body>
+
+</html>
