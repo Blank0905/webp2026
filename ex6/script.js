@@ -15,7 +15,6 @@ window.onload = function() {
     ddd.textContent += newChars;
 }
 
-
 window.addEventListener("keyup", function(e){
     console.log(e.key);
     let currentStr = ddd.textContent;
