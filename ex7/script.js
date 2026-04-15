@@ -22,9 +22,9 @@ window.addEventListener("keyup", function(e){
     if (currentStr.length > 0 && e.key === currentStr[0]) {
         
         // 2. 一樣的話把第一個字元消除 (保留索引 1 之後的所有字)
-        container.textContent = currentStr.substring(1);
+        ddd.textContent = currentStr.substring(1);
         
-        console.log("消掉一個字！剩餘：", container.textContent);
+        console.log("消掉一個字！剩餘：", ddd.textContent);
         count_wrong = 0;
         add_new_char();
     }
@@ -41,7 +41,7 @@ window.addEventListener("keyup", function(e){
 
 function add_new_char() {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
-    // 產生 0 到 2 個字元 (Math.random() * 3 會得到 0, 1, 2)
+    // 產生 1 到 3 個字元
     const count = Math.floor(Math.random() * (4-1)+1); 
     
     let newChars = "";
