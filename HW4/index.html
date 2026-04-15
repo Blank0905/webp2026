@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景點觀光資訊 - 分頁與搜尋版</title>
+    <style>
+        /* 保留你原本的 CSS */
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 6px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* 新增控制介面樣式 */
+        .controls {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pagination {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        #searchInput {
+            padding: 5px;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>景點觀光資訊</h1>
+
+    <div class="controls">
+        <label for="searchInput">名稱搜尋：</label>
+        <input type="text" id="searchInput" placeholder="請輸入關鍵字後按 Enter 或移開焦點..." onchange="searchData()">
+    </div>
+
+    <table id="csie" class="table table_stripe table_hover">
+        <thead>
+            <tr>
+                <th>名稱</th>
+                <th>地點</th>
+                <th>票價</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button onclick="changePage(-1)">上一頁</button>
+        <span id="pageDisplay">第 1 / 1 頁</span>
+        <button onclick="changePage(1)">下一頁</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
